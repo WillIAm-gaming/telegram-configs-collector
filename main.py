@@ -55,7 +55,7 @@ with open("./splitted/no-match", "w") as no_match_file:
 with open(last_update_file_path, 'r') as file:
     last_update_datetime = file.readline()
     last_update_datetime = datetime.strptime(last_update_datetime, '%Y-%m-%d %H:%M:%S.%f%z')
-    last_update_datetime -= timedelta(hours=12)
+#    last_update_datetime -= timedelta(hours=12)
 
 with open(last_update_file_path, 'w') as file:
     current_datetime_update = datetime.now(tz=timezone(timedelta(hours=3, minutes=30)))
@@ -110,6 +110,8 @@ if (current_datetime_update - last_reset_datetime).days >= 5:
 
     with open(last_reset_file_path, 'w') as f:
         f.write(current_datetime_update.isoformat())
+
+    last_reset_datetime = current_datetime_update
 
 print("\n[DEBUG REPORT]")
 print(f"[DEBUG] Last Reset Datetime     : {last_reset_datetime} (tzinfo: {last_reset_datetime.tzinfo})")
