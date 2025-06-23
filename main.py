@@ -83,9 +83,9 @@ if (current_datetime_update - last_reset_datetime).days >= 5:
     print("[INFO] Resetting All Collected Configurations (5-day interval).")
 
         # عقب بردن زمان برای جمع‌آوری مجدد کانفیگ‌های اخیر
-        last_update_datetime = current_datetime_update - timedelta(days=1)
-        with open(last_update_file_path, 'w') as f:
-            f.write(str(last_update_datetime))
+    last_update_datetime = current_datetime_update - timedelta(days=1)
+    with open(last_update_file_path, 'w') as f:
+        f.write(str(last_update_datetime))
 
     for root_dir in dirs_list:
         for path in get_absolute_paths(root_dir):
