@@ -75,7 +75,10 @@ last_reset_file_path = os.path.join(BASE_DIR, 'last_reset.txt')
 if os.path.exists(last_reset_file_path):
     with open(last_reset_file_path, 'r') as f:
         last_reset_datetime_str = f.read().strip()
-    last_reset_datetime = isoparse(last_reset_datetime_str).astimezone(current_datetime_update.tzinfo)
+    parsed = isoparse(last_reset_datetime_str)
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=current_datetime_update.tzinfo)
+    last_reset_datetime = parsed
 else:
     last_reset_datetime = datetime.min
 
