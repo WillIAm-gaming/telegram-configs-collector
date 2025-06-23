@@ -67,8 +67,7 @@ def get_absolute_paths(start_path):
             abs_paths.append(str(abs_path))
     return abs_paths
 
-dirs_list = ['./security', './protocols', './networks', './layers'
-            './subscribe', './splitted', './channels']
+dirs_list = ['./security', './protocols', './networks', './layers', './subscribe', './splitted', './channels']
 
 if (current_datetime_update - last_update_datetime).days >= 5:
     print("The All Collected Configurations Cleared Based On Scheduled Day".title())
