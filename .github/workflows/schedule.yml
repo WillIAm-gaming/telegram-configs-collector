@@ -2,17 +2,17 @@ name: Execute On Schedule
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Executes at minute 0 of every hour
-  workflow_dispatch:
+    - cron: '0/30 * * * *'  # Executes every 30 minutes
+  workflow_dispatch:        # Optional manual trigger
 
 permissions:
-  contents: write  # این خط برای فعال‌سازی push با GITHUB_TOKEN داخلی الزامی است
+  contents: write  # Required for pushing with a personal token
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
 
+    steps:
       - name: Checkout Repository Contents
         uses: actions/checkout@v4
 
@@ -34,8 +34,11 @@ jobs:
           git config --local user.email "seyyedsoroushmirzaei@protonmail.com"
           git config --local user.name "Soroush Mirzaei"
           git add -A
-          git diff-index --quiet HEAD || (git commit -a -m "Updated $(TZ='Asia/Tehran' date '+%Y-%m-%d %H:%M %Z')" --allow-empty)
-          
+          git diff-index --quiet HEAD || git commit -m "Updated $(TZ='Asia/Tehran' date '+%Y-%m-%d %H:%M %Z')"
+
+      - name: Pull Latest Changes
+        run: git pull origin main --rebase
+
       - name: Push Changes
         uses: ad-m/github-push-action@v0.6.0
         with:
