@@ -67,7 +67,6 @@ def get_absolute_paths(start_path):
     return abs_paths
 
 dirs_list = ['./security', './protocols', './networks', './layers', './subscribe', './splitted', './channels']
-            './subscribe', './splitted', './channels']
 
 # Track last reset time independently of updates
 last_reset_file_path = os.path.join(BASE_DIR, 'last_reset.txt')
