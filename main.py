@@ -598,7 +598,6 @@ for url_link in subscription_links:
         elif 'soroushmirzaei' in url_link and 'channels' in url_link:
             channel_array_links_content.append((url_link, links_content))
     except:
-        pass
         continue
 
 
@@ -619,7 +618,6 @@ for url_link, content in decoded_contents:
             link_contents[index] = re.sub(r"#[^#]+$", "", element)
         array_links_content_decoded.append((url_link, link_contents))
     except:
-        pass
         continue
 
 
@@ -633,7 +631,6 @@ for url_link, content in raw_decoded_contents:
             link_contents[index] = re.sub(r"#[^#]+$", "", element)
         raw_array_links_content_decoded.append((url_link, link_contents))
     except:
-        pass
         continue
 
 
@@ -647,7 +644,6 @@ for url_link, content in channel_decoded_contents:
             link_contents[index] = re.sub(r"#[^#]+$", "", element)
         channel_array_links_content_decoded.append((url_link, link_contents))
     except:
-        pass
         continue
 
 
@@ -787,7 +783,6 @@ def remove_duplicate_modified(array_configuration):
                         key = re.sub(r"servicename", "serviceName", re.sub(r"headertype", "headerType", re.sub(r"allowinsecure", "allowInsecure", key.lower()),),)
                         dict_params[key.lower()] = value.lower() if type(value) == str else value
                     except:
-        pass
                         pass
 
                 dict_params = {k: v for k, v in sorted(dict_params.items(), key=lambda item: item[0])}
@@ -844,7 +839,6 @@ def remove_duplicate_modified(array_configuration):
                 country_config_dict[non_title_config] = config
 
         except:
-        pass
             continue
 
     
