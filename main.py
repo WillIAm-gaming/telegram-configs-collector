@@ -72,15 +72,15 @@ dirs_list = ['./security', './protocols', './networks', './layers', './subscribe
 # Track last reset time independently of updates
 last_reset_file_path = os.path.join(BASE_DIR, 'last_reset.txt')
 
-if os.path.exists(last_reset_file_path):
+try:
     with open(last_reset_file_path, 'r') as f:
         last_reset_datetime_str = f.read().strip()
     parsed = isoparse(last_reset_datetime_str)
     if parsed.tzinfo is None:
         parsed = parsed.replace(tzinfo=current_datetime_update.tzinfo)
     last_reset_datetime = parsed
-else:
-    last_reset_datetime = datetime.min
+except (FileNotFoundError, ValueError):
+    last_reset_datetime = current_datetime_update - timedelta(days=10)
 
 print(f"DEBUG - last_reset_datetime: {last_reset_datetime} (tzinfo: {last_reset_datetime.tzinfo})")
 print(f"DEBUG - current_datetime_update: {current_datetime_update} (tzinfo: {current_datetime_update.tzinfo})")
