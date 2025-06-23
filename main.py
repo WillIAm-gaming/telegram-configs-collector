@@ -74,7 +74,7 @@ last_reset_file_path = os.path.join(BASE_DIR, 'last_reset.txt')
 if os.path.exists(last_reset_file_path):
     with open(last_reset_file_path, 'r') as f:
         last_reset_datetime_str = f.read().strip()
-        last_reset_datetime = datetime.fromisoformat(last_reset_str).astimezone(current_datetime_update.tzinfo)
+last_reset_datetime = datetime.fromisoformat(last_reset_datetime_str).astimezone(current_datetime_update.tzinfo)
 else:
     last_reset_datetime = datetime.min
 
@@ -82,11 +82,10 @@ else:
 if (current_datetime_update - last_reset_datetime).days >= 5:
     print("[INFO] Resetting All Collected Configurations (5-day interval).")
 
-        # عقب بردن زمان برای جمع‌آوری مجدد کانفیگ‌های اخیر
+    # عقب بردن زمان برای جمع‌آوری مجدد کانفیگ‌های اخیر
     last_update_datetime = current_datetime_update - timedelta(days=1)
     with open(last_update_file_path, 'w') as f:
         f.write(str(last_update_datetime))
-
     for root_dir in dirs_list:
         for path in get_absolute_paths(root_dir):
             if not path.lower().endswith('readme.md'):
@@ -320,6 +319,7 @@ for url in array_url:
             tg_user = ''.join([element for element in list(tg_user) if element in string.ascii_letters + string.digits + '_'])
             tg_username_list.add(tg_user.lower())
     except:
+        pass
         url_subscription_links.add(url.split("\"")[0])
         continue
 
@@ -361,6 +361,7 @@ for channel_user in new_telegram_channels:
                 channel_messages.append(div_message)
             new_channel_messages.append((channel_user, channel_messages))
         except:
+        pass
             continue
     else:
         continue
@@ -429,6 +430,7 @@ for channel, messages in new_channel_messages:
                 tg_user = ''.join([element for element in list(tg_user) if element in string.ascii_letters + string.digits + '_'])
                 tg_username_list_new.add(tg_user.lower())
         except:
+        pass
             url_subscription_links.add(url.split("\"")[0])
             continue
 
@@ -458,6 +460,7 @@ for channel, messages in new_channel_messages:
                     channel_messages.append(div_message)
                 #new_channel_messages.append((channel_user, channel_messages))
             except:
+        pass
                 continue
         else:
             continue
@@ -518,6 +521,7 @@ def is_valid_base64(string_value):
     except:
         pass
 
+
 def decode_string(content):
     # Decode strings and append to array
     if is_valid_base64(content):
@@ -553,6 +557,7 @@ for url in url_subscription_links:
         if tg_user not in ['proxy', 'img', 'emoji', 'joinchat']:
             new_tg_username_list.add(tg_user.lower())
     except:
+        pass
         new_url_subscription_links.add(url.split("\"")[0])
         continue
 
@@ -597,6 +602,7 @@ for url_link in subscription_links:
         elif 'soroushmirzaei' in url_link and 'channels' in url_link:
             channel_array_links_content.append((url_link, links_content))
     except:
+        pass
         continue
 
 
@@ -617,6 +623,7 @@ for url_link, content in decoded_contents:
             link_contents[index] = re.sub(r"#[^#]+$", "", element)
         array_links_content_decoded.append((url_link, link_contents))
     except:
+        pass
         continue
 
 
@@ -630,6 +637,7 @@ for url_link, content in raw_decoded_contents:
             link_contents[index] = re.sub(r"#[^#]+$", "", element)
         raw_array_links_content_decoded.append((url_link, link_contents))
     except:
+        pass
         continue
 
 
@@ -643,6 +651,7 @@ for url_link, content in channel_decoded_contents:
             link_contents[index] = re.sub(r"#[^#]+$", "", element)
         channel_array_links_content_decoded.append((url_link, link_contents))
     except:
+        pass
         continue
 
 
@@ -782,6 +791,7 @@ def remove_duplicate_modified(array_configuration):
                         key = re.sub(r"servicename", "serviceName", re.sub(r"headertype", "headerType", re.sub(r"allowinsecure", "allowInsecure", key.lower()),),)
                         dict_params[key.lower()] = value.lower() if type(value) == str else value
                     except:
+        pass
                         pass
 
                 dict_params = {k: v for k, v in sorted(dict_params.items(), key=lambda item: item[0])}
@@ -838,6 +848,7 @@ def remove_duplicate_modified(array_configuration):
                 country_config_dict[non_title_config] = config
 
         except:
+        pass
             continue
 
     
