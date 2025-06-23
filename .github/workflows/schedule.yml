@@ -2,7 +2,7 @@ name: Execute On Schedule
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # Executes at minute 0 of every hour (i.e., every hour)
+    - cron: '0 * * * *'  # Executes at minute 0 of every hour (i.e., every hour)
   workflow_dispatch:
 
 jobs:
