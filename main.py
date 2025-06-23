@@ -67,6 +67,7 @@ def get_absolute_paths(start_path):
         for file in files:
             abs_path = Path(root).joinpath(file).resolve()
             abs_paths.append(str(abs_path))
+    return abs_paths
 
 dirs_list = ['./security', './protocols', './networks', './layers', './subscribe', './splitted', './channels']
 
