@@ -15,7 +15,6 @@ from datetime import datetime, timezone, timedelta
 import html
 import requests
 from bs4 import BeautifulSoup
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 #import regex and encoding libraries
@@ -66,9 +65,9 @@ def get_absolute_paths(start_path):
         for file in files:
             abs_path = Path(root).joinpath(file).resolve()
             abs_paths.append(str(abs_path))
-    return abs_paths
 
 dirs_list = ['./security', './protocols', './networks', './layers', './subscribe', './splitted', './channels']
+            './subscribe', './splitted', './channels']
 
 # Track last reset time independently of updates
 last_reset_file_path = os.path.join(BASE_DIR, 'last_reset.txt')
@@ -84,6 +83,11 @@ else:
 if (current_datetime_update - last_reset_datetime).days >= 5:
     print("[INFO] Resetting All Collected Configurations (5-day interval).")
 
+        # عقب بردن زمان برای جمع‌آوری مجدد کانفیگ‌های اخیر
+        last_update_datetime = current_datetime_update - timedelta(days=1)
+        with open(last_update_file_path, 'w') as f:
+            f.write(str(last_update_datetime))
+
     for root_dir in dirs_list:
         for path in get_absolute_paths(root_dir):
             if not path.lower().endswith('readme.md'):
@@ -93,6 +97,7 @@ if (current_datetime_update - last_reset_datetime).days >= 5:
     with open(last_reset_file_path, 'w') as f:
         f.write(current_datetime_update.isoformat())
 
+
 def tg_channel_messages(channel_user):
     try:
         # Retrieve channels messages
@@ -101,7 +106,6 @@ def tg_channel_messages(channel_user):
         # Find all telegram widget messages
         div_messages = soup.find_all("div", class_="tgme_widget_message")
         # Return list of all messages in channel
-        return div_messages
     except Exception as exc:
         pass
 
@@ -174,7 +178,6 @@ def find_matches(text_content):
     # Extend hysteria versions
     matches_hysteria.extend(matches_hysteria_ver2)
     
-    return matches_usersname, matches_url, matches_shadowsocks, matches_trojan, matches_vmess, matches_vless, matches_reality, matches_tuic, matches_hysteria, matches_juicity
 
 
 def tg_message_time(div_message):
@@ -192,7 +195,6 @@ def tg_message_time(div_message):
     datetime_now = datetime.now(tz = timezone(timedelta(hours = 3, minutes = 30)))
 
     # Return datetime object, current datetime based on Iran datetime and delta datetime
-    return datetime_object, datetime_now, datetime_now - datetime_object
 
 
 def tg_message_text(div_message, content_extracter):
@@ -206,12 +208,6 @@ def tg_message_text(div_message, content_extracter):
                               re.sub(r"<a[^<>]+>([^<>]+)</a>", r"\1",re.sub(r"\s*", "", text_content),),)
     
     # Return text content
-    return text_content
-    
-# بعد از پاک‌سازی، زمان آپدیت رو هم به عقب ببریم (برای جمع‌آوری مجدد)
-last_update_datetime = current_datetime_update - timedelta(days=1)
-with open(last_update_file_path, 'w') as f:
-    f.write(str(last_update_datetime))
 
 
 # Load telegram channels usernames
@@ -521,7 +517,6 @@ def is_valid_base64(string_value):
         # Encode the decoded bytes back to base64 and compare to the original string
         return base64.b64encode(byte_decoded).decode("utf-8") == string_value
     except:
-        return False
 
 
 def decode_string(content):
@@ -543,9 +538,7 @@ def decode_vmess(vmess_config):
         encoded_config = decoded_config.encode('utf-8')
         encoded_config = base64.b64encode(encoded_config).decode('utf-8')
         encoded_config = f"vmess://{encoded_config}"
-        return encoded_config
     except:
-        return None
 
 
 # Update url subscription links
@@ -847,7 +840,6 @@ def remove_duplicate_modified(array_configuration):
         except:
             continue
 
-    return list(country_config_dict.values())
     
 
 def remove_duplicate(shadow_array, trojan_array, vmess_array, vless_array, reality_array, tuic_array, hysteria_array, juicity_array, vmess_decode_dedup = True):
@@ -868,7 +860,6 @@ def remove_duplicate(shadow_array, trojan_array, vmess_array, vless_array, reali
         vmess_array = [config for config in vmess_array if config != None]
         vmess_array = list(set(vmess_array))
 
-    return shadow_array, trojan_array, vmess_array, vless_array, reality_array, tuic_array, hysteria_array, juicity_array
 
 
 def modify_config(shadow_array, trojan_array, vmess_array, vless_array, reality_array, tuic_array, hysteria_array, check_port_connection = True):
@@ -904,7 +895,6 @@ def modify_config(shadow_array, trojan_array, vmess_array, vless_array, reality_
     for array in [shadow_grpc_array, trojan_grpc_array, vmess_grpc_array, vless_grpc_array, reality_grpc_array]:
         grpc_array.extend(array)
 
-    return shadow_array, trojan_array, vmess_array, vless_array, reality_array, tuic_array, hysteria_array, tls_array, non_tls_array, tcp_array, ws_array, http_array, grpc_array
 
 
 # Remove Duplicate Configurations
@@ -1067,7 +1057,6 @@ def create_title(title, port):
     shadowsocs_uuid = base64.b64encode(f"none:{uuid}".encode('utf-8')).decode('utf-8')
     shadowsocks_config_title = f"ss://{shadowsocs_uuid}@127.0.0.1:{port}#{title}"
 
-    return reality_config_title, vless_config_title, vmess_config_title, trojan_config_title, shadowsocks_config_title
 
 
 # Define update date and time based on Iran timezone and calendar
@@ -1640,3 +1629,6 @@ stats = """## Stats
 
 with open('./readme.md', 'w') as file:
     file.write(readme + '\n' + create_country_table('./countries') + '\n' + stats)
+# Ensure last_reset.txt write
+with open(last_reset_file_path, 'w') as f:
+    f.write(current_datetime_update.isoformat())
