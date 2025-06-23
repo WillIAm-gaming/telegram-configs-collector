@@ -6,3 +6,4 @@ beautifulsoup4
 geoip2
 dnspython
 pycountry_convert
+python-dateutil
