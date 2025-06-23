@@ -2,7 +2,7 @@ name: Execute On Schedule
 
 on:
   schedule:
-    - cron: '0/30 * * * *'  # Executes every 30 minutes
+    - cron: '0 * * * *'  # Executes every 30 minutes
   workflow_dispatch:        # Optional manual trigger
 
 permissions:
