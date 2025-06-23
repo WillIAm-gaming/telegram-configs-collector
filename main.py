@@ -71,7 +71,7 @@ dirs_list = ['./security', './protocols', './networks', './layers', './subscribe
 
 if (current_datetime_update - last_update_datetime).days >= 5:
     print("The All Collected Configurations Cleared Based On Scheduled Day".title())
-    last_update_datetime = last_update_datetime - timedelta(days=3)
+    last_update_datetime = last_update_datetime - timedelta(days=1)
     print(f"The Latest Update Time Is Set To {last_update_datetime.strftime('%a, %d %b %Y %X %Z')}".title())
     for root_dir in dirs_list:
         for path in get_absolute_paths(root_dir):
