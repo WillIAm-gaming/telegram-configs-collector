@@ -53,7 +53,6 @@ with open('./last update', 'r') as file:
 # Write the current date and time update
 with open('./last update', 'w') as file:
     current_datetime_update = datetime.now(tz = timezone(timedelta(hours = 3, minutes = 30)))
-    jalali_current_datetime_update = jdatetime.datetime.now(tz = timezone(timedelta(hours = 3, minutes = 30)))
     file.write(f'{current_datetime_update}')
 
 print(f"Latest Update: {last_update_datetime.strftime('%a, %d %b %Y %X %Z')}\nCurrent Update: {current_datetime_update.strftime('%a, %d %b %Y %X %Z')}")
@@ -68,28 +67,30 @@ def get_absolute_paths(start_path):
     return abs_paths
 
 dirs_list = ['./security', './protocols', './networks', './layers', './subscribe', './splitted', './channels']
+            './subscribe', './splitted', './channels']
 
-if (int(jalali_current_datetime_update.day) == 1 and int(jalali_current_datetime_update.hour) == 0) or (int(jalali_current_datetime_update.day) == 15 and int(jalali_current_datetime_update.hour) == 0):
-if (current_datetime_update - last_update_datetime).days >= 5:
+# Track last reset time independently of updates
+last_reset_file_path = os.path.join(BASE_DIR, 'last_reset.txt')
+
+if os.path.exists(last_reset_file_path):
+    with open(last_reset_file_path, 'r') as f:
+        last_reset_datetime_str = f.read().strip()
+        last_reset_datetime = datetime.fromisoformat(last_reset_datetime_str)
+else:
+    last_reset_datetime = datetime.min
+
+# Check if 5 days passed since last cleanup
+if (current_datetime_update - last_reset_datetime).days >= 5:
     print("[INFO] Resetting All Collected Configurations (5-day interval).")
 
-    # عقب بردن زمان برای جمع‌آوری مجدد کانفیگ‌های اخیر
-    last_update_datetime -= timedelta(days=1)
-    print(f"[INFO] Last update time moved to: {last_update_datetime.strftime('%Y-%m-%d %H:%M:%S')}")
-
-    # پاک‌سازی فایل‌ها به جز readme.md
     for root_dir in dirs_list:
         for path in get_absolute_paths(root_dir):
-            if not path.endswith('readme.md'):
+            if not path.lower().endswith('readme.md'):
                 with open(path, 'w') as file:
                     file.write('')
 
-def json_load(path):
-    # Open and read the json file
-    with open(path, 'r') as file:
-        # Load json file content into list
-        list_content = json.load(file)
-    # Return list of json content
+    with open(last_reset_file_path, 'w') as f:
+        f.write(current_datetime_update.isoformat())
     return list_content
 
 
@@ -207,6 +208,11 @@ def tg_message_text(div_message, content_extracter):
     
     # Return text content
     return text_content
+    
+# بعد از پاک‌سازی، زمان آپدیت رو هم به عقب ببریم (برای جمع‌آوری مجدد)
+last_update_datetime = current_datetime_update - timedelta(days=3)
+with open(last_update_file_path, 'w') as f:
+    f.write(str(last_update_datetime))
 
 
 # Load telegram channels usernames
