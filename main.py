@@ -59,8 +59,6 @@ with open(last_update_file_path, 'r') as file:
 
 with open(last_update_file_path, 'w') as file:
     current_datetime_update = datetime.now(tz=timezone(timedelta(hours=3, minutes=30)))
-    file.write(f'{current_datetime_update}')
-
 
 print(f"Latest Update: {last_update_datetime.strftime('%a, %d %b %Y %X %Z')}\nCurrent Update: {current_datetime_update.strftime('%a, %d %b %Y %X %Z')}")
 
@@ -88,6 +86,14 @@ try:
 except (FileNotFoundError, ValueError):
     last_reset_datetime = current_datetime_update - timedelta(days=10)
 
+print("\n[DEBUG REPORT]")
+print(f"[DEBUG] Last Reset Datetime     : {last_reset_datetime} (tzinfo: {last_reset_datetime.tzinfo})")
+print(f"[DEBUG] Last Update Datetime    : {last_update_datetime} (tzinfo: {last_update_datetime.tzinfo})")
+print(f"[DEBUG] Current Update Datetime : {current_datetime_update} (tzinfo: {current_datetime_update.tzinfo})")
+print(f"[DEBUG] Days Since Last Reset   : {(current_datetime_update - last_reset_datetime).days}")
+print("[/DEBUG REPORT]\n")
+
+
 # Check if 5 days passed since last cleanup
 if (current_datetime_update - last_reset_datetime).days >= 5:
     print("[INFO] Resetting All Collected Configurations (5-day interval).")
@@ -105,6 +111,12 @@ if (current_datetime_update - last_reset_datetime).days >= 5:
     with open(last_reset_file_path, 'w') as f:
         f.write(current_datetime_update.isoformat())
 
+print("\n[DEBUG REPORT]")
+print(f"[DEBUG] Last Reset Datetime     : {last_reset_datetime} (tzinfo: {last_reset_datetime.tzinfo})")
+print(f"[DEBUG] Last Update Datetime    : {last_update_datetime} (tzinfo: {last_update_datetime.tzinfo})")
+print(f"[DEBUG] Current Update Datetime : {current_datetime_update} (tzinfo: {current_datetime_update.tzinfo})")
+print(f"[DEBUG] Days Since Last Reset   : {(current_datetime_update - last_reset_datetime).days}")
+print("[/DEBUG REPORT]\n")
 
 def tg_channel_messages(channel_user):
     try:
@@ -250,6 +262,8 @@ for channel_user in telegram_channels:
 # Print out total new messages counter
 print(f"\nTotal New Messages From {last_update_datetime.strftime('%a, %d %b %Y %X %Z')} To {current_datetime_update.strftime('%a, %d %b %Y %X %Z')} : {len(channel_messages_array)}\n")
 
+with open(last_update_file_path, 'w') as file:
+    file.write(f'{current_datetime_update}')
 
 # Initial arrays for protocols
 array_usernames = list()
