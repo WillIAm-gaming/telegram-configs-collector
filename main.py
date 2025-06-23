@@ -319,7 +319,6 @@ for url in array_url:
             tg_user = ''.join([element for element in list(tg_user) if element in string.ascii_letters + string.digits + '_'])
             tg_username_list.add(tg_user.lower())
     except:
-        pass
         url_subscription_links.add(url.split("\"")[0])
         continue
 
@@ -458,7 +457,6 @@ for channel, messages in new_channel_messages:
                     channel_messages.append(div_message)
                 #new_channel_messages.append((channel_user, channel_messages))
             except:
-        pass
                 continue
         else:
             continue
