@@ -16,6 +16,8 @@ import html
 import requests
 from bs4 import BeautifulSoup
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 #import regex and encoding libraries
 import re
 import base64
