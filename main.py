@@ -17,6 +17,7 @@ import html
 import requests
 from bs4 import BeautifulSoup
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+last_update_file_path = os.path.join(BASE_DIR, 'last update')
 
 #import regex and encoding libraries
 import re
@@ -48,14 +49,14 @@ with open("./splitted/no-match", "w") as no_match_file:
 
 
 # Load and read last date and time update
-with open('./last update', 'r') as file:
+with open(last_update_file_path, 'r') as file:
     last_update_datetime = file.readline()
     last_update_datetime = datetime.strptime(last_update_datetime, '%Y-%m-%d %H:%M:%S.%f%z')
 
-# Write the current date and time update
-with open('./last update', 'w') as file:
-    current_datetime_update = datetime.now(tz = timezone(timedelta(hours = 3, minutes = 30)))
+with open(last_update_file_path, 'w') as file:
+    current_datetime_update = datetime.now(tz=timezone(timedelta(hours=3, minutes=30)))
     file.write(f'{current_datetime_update}')
+
 
 print(f"Latest Update: {last_update_datetime.strftime('%a, %d %b %Y %X %Z')}\nCurrent Update: {current_datetime_update.strftime('%a, %d %b %Y %X %Z')}")
 
@@ -81,9 +82,6 @@ try:
     last_reset_datetime = parsed
 except (FileNotFoundError, ValueError):
     last_reset_datetime = current_datetime_update - timedelta(days=10)
-
-print(f"DEBUG - last_reset_datetime: {last_reset_datetime} (tzinfo: {last_reset_datetime.tzinfo})")
-print(f"DEBUG - current_datetime_update: {current_datetime_update} (tzinfo: {current_datetime_update.tzinfo})")
 
 # Check if 5 days passed since last cleanup
 if (current_datetime_update - last_reset_datetime).days >= 5:
