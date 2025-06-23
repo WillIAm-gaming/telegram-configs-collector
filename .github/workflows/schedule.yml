@@ -16,6 +16,9 @@ jobs:
       - name: Checkout Repository Contents
         uses: actions/checkout@v4
 
+      - name: Pull Latest Changes
+        run: git pull origin main --rebase
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
@@ -24,20 +27,20 @@ jobs:
       - name: Install Python Packages Requirements
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r requirements  # ✅ بدون .txt چون تو واقعاً فایل بدون پسونده
           
       - name: Execute Python Script
         run: python main.py
           
-      - name: Commit Files
+      - name: Configure Git
         run: |
           git config --local user.email "seyyedsoroushmirzaei@protonmail.com"
           git config --local user.name "Soroush Mirzaei"
+
+      - name: Commit Files
+        run: |
           git add -A
           git diff-index --quiet HEAD || git commit -m "Updated $(TZ='Asia/Tehran' date '+%Y-%m-%d %H:%M %Z')"
-
-      - name: Pull Latest Changes
-        run: git pull origin main --rebase
 
       - name: Push Changes
         uses: ad-m/github-push-action@v0.6.0
