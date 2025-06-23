@@ -210,7 +210,7 @@ def tg_message_text(div_message, content_extracter):
     return text_content
     
 # بعد از پاک‌سازی، زمان آپدیت رو هم به عقب ببریم (برای جمع‌آوری مجدد)
-last_update_datetime = current_datetime_update - timedelta(days=3)
+last_update_datetime = current_datetime_update - timedelta(days=1)
 with open(last_update_file_path, 'w') as f:
     f.write(str(last_update_datetime))
 
