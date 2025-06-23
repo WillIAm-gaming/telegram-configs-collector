@@ -82,6 +82,9 @@ if os.path.exists(last_reset_file_path):
 else:
     last_reset_datetime = datetime.min
 
+print(f"DEBUG - last_reset_datetime: {last_reset_datetime} (tzinfo: {last_reset_datetime.tzinfo})")
+print(f"DEBUG - current_datetime_update: {current_datetime_update} (tzinfo: {current_datetime_update.tzinfo})")
+
 # Check if 5 days passed since last cleanup
 if (current_datetime_update - last_reset_datetime).days >= 5:
     print("[INFO] Resetting All Collected Configurations (5-day interval).")
