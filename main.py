@@ -516,7 +516,7 @@ def is_valid_base64(string_value):
         # Encode the decoded bytes back to base64 and compare to the original string
         return base64.b64encode(byte_decoded).decode("utf-8") == string_value
     except:
-
+        pass
 
 def decode_string(content):
     # Decode strings and append to array
@@ -538,6 +538,7 @@ def decode_vmess(vmess_config):
         encoded_config = base64.b64encode(encoded_config).decode('utf-8')
         encoded_config = f"vmess://{encoded_config}"
     except:
+        pass
 
 
 # Update url subscription links
