@@ -78,7 +78,6 @@ if (current_datetime_update - last_update_datetime).days >= 5:
             if not path.endswith('readme.md'):
                 with open(path, 'w') as file:
                     file.write('')
-                    file.close
             else:
                 continue
 
