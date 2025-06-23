@@ -361,7 +361,6 @@ for channel_user in new_telegram_channels:
                 channel_messages.append(div_message)
             new_channel_messages.append((channel_user, channel_messages))
         except:
-        pass
             continue
     else:
         continue
