@@ -90,8 +90,6 @@ if (current_datetime_update - last_reset_datetime).days >= 5:
 
     with open(last_reset_file_path, 'w') as f:
         f.write(current_datetime_update.isoformat())
-    return list_content
-
 
 def tg_channel_messages(channel_user):
     try:
