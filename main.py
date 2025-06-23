@@ -69,18 +69,20 @@ def get_absolute_paths(start_path):
 
 dirs_list = ['./security', './protocols', './networks', './layers', './subscribe', './splitted', './channels']
 
+if (int(jalali_current_datetime_update.day) == 1 and int(jalali_current_datetime_update.hour) == 0) or (int(jalali_current_datetime_update.day) == 15 and int(jalali_current_datetime_update.hour) == 0):
 if (current_datetime_update - last_update_datetime).days >= 5:
-    print("The All Collected Configurations Cleared Based On Scheduled Day".title())
-    last_update_datetime = last_update_datetime - timedelta(days=1)
-    print(f"The Latest Update Time Is Set To {last_update_datetime.strftime('%a, %d %b %Y %X %Z')}".title())
+    print("[INFO] Resetting All Collected Configurations (5-day interval).")
+
+    # عقب بردن زمان برای جمع‌آوری مجدد کانفیگ‌های اخیر
+    last_update_datetime -= timedelta(days=1)
+    print(f"[INFO] Last update time moved to: {last_update_datetime.strftime('%Y-%m-%d %H:%M:%S')}")
+
+    # پاک‌سازی فایل‌ها به جز readme.md
     for root_dir in dirs_list:
         for path in get_absolute_paths(root_dir):
             if not path.endswith('readme.md'):
                 with open(path, 'w') as file:
                     file.write('')
-            else:
-                continue
-
 
 def json_load(path):
     # Open and read the json file
