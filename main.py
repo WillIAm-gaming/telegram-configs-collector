@@ -26,6 +26,9 @@ import base64
 #import custom python script
 from title import check_modify_config, create_country, create_country_table, create_internet_protocol
 
+def json_load(filename):
+    with open(filename, 'r', encoding='utf-8') as f:
+        return json.load(f)
 
 # Create the geoip-lite folder if it doesn't exist
 if not os.path.exists('./geoip-lite'):
