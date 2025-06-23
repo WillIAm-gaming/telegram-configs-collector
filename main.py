@@ -429,7 +429,6 @@ for channel, messages in new_channel_messages:
                 tg_user = ''.join([element for element in list(tg_user) if element in string.ascii_letters + string.digits + '_'])
                 tg_username_list_new.add(tg_user.lower())
         except:
-        pass
             url_subscription_links.add(url.split("\"")[0])
             continue
 
