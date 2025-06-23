@@ -1,10 +1,11 @@
 name: Execute On Schedule
 
 on:
-  schedule:  
-    - cron: '15/30 * * * *' # Executes at 15 minutes past the hour.
-    workflow_dispatch: 
-     
+  schedule:
+    - cron: '15 * * * *'
+    - cron: '45 * * * *'
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
