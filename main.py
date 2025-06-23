@@ -55,6 +55,7 @@ with open("./splitted/no-match", "w") as no_match_file:
 with open(last_update_file_path, 'r') as file:
     last_update_datetime = file.readline()
     last_update_datetime = datetime.strptime(last_update_datetime, '%Y-%m-%d %H:%M:%S.%f%z')
+    last_update_datetime -= timedelta(hours=12)
 
 with open(last_update_file_path, 'w') as file:
     current_datetime_update = datetime.now(tz=timezone(timedelta(hours=3, minutes=30)))
