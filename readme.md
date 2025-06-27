@@ -148,7 +148,8 @@ Subscription links for configurations are organized according to country and pro
 | TH | Thailand | [Subscription Link](https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/countries/th/mixed) | TR | Türkiye | [Subscription Link](https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/countries/tr/mixed) |
 | UA | Ukraine | [Subscription Link](https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/countries/ua/mixed) | AE | United Arab Emirates | [Subscription Link](https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/countries/ae/mixed) |
 | GB | United Kingdom | [Subscription Link](https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/countries/gb/mixed) | US | United States | [Subscription Link](https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/countries/us/mixed) |
-| VN | Viet Nam | [Subscription Link](https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/countries/vn/mixed) | VG | Virgin Islands, British | [Subscription Link](https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/countries/vg/mixed) |
+| UZ | Uzbekistan | [Subscription Link](https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/countries/uz/mixed) | VN | Viet Nam | [Subscription Link](https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/countries/vn/mixed) |
+| VG | Virgin Islands, British | [Subscription Link](https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/countries/vg/mixed) |
 ## Stats
 [![Stars](https://starchart.cc/soroushmirzaei/telegram-configs-collector.svg?variant=adaptive)](https://starchart.cc/soroushmirzaei/telegram-configs-collector)
 ## Activity
