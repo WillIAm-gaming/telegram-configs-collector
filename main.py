@@ -356,13 +356,13 @@ for index, tg_user in enumerate(array_usernames):
 
 # Retrive and update channels from telegram proxies Repository
 #url = 'https://raw.githubusercontent.com/soroushmirzaei/telegram-proxies-collector/main/telegram channels.json'
-filename = 'telegram proxies channel.json'
+#filename = 'telegram proxies channel.json'
 #wget.download(url, filename)
 
-tg_username_list.update(array_usernames)
-telegram_proxies_channel = json_load('./telegram proxies channel.json')
-tg_username_list.update(telegram_proxies_channel)
-os.remove('./telegram proxies channel.json')
+#tg_username_list.update(array_usernames)
+#telegram_proxies_channel = json_load('./telegram proxies channel.json')
+#tg_username_list.update(telegram_proxies_channel)
+#os.remove('./telegram proxies channel.json')
 
 
 # Subtract and get new telegram channels
