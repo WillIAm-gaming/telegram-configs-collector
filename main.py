@@ -35,7 +35,7 @@ if os.path.exists('./geoip-lite/geoip-lite-country.mmdb'):
     os.remove('./geoip-lite/geoip-lite-country.mmdb')
 
 # Download the file and rename it
-url = 'https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-Country.mmdb'
+url = 'https://raw.githubusercontent.com/SilencerWeb/geoip2-mmdb/main/Country/GeoLite2-Country.mmdb'
 filename = 'geoip-lite-country.mmdb'
 wget.download(url, filename)
 
