@@ -31,20 +31,22 @@ from title import check_modify_config, create_country, create_country_table, cre
 if not os.path.exists('./geoip-lite'):
     os.mkdir('./geoip-lite')
 
-if os.path.exists('./geoip-lite/geoip-lite-country.mmdb'):
-    os.remove('./geoip-lite/geoip-lite-country.mmdb')
+filename = './geoip-lite/geoip-lite-country.mmdb'
+
+#if os.path.exists('./geoip-lite/geoip-lite-country.mmdb'):
+#    os.remove('./geoip-lite/geoip-lite-country.mmdb')
 
 # Download the file and rename it
-url = 'https://raw.githubusercontent.com/SilencerWeb/geoip2-mmdb/main/Country/GeoLite2-Country.mmdb'
-filename = 'geoip-lite-country.mmdb'
+#url = 'https://raw.githubusercontent.com/SilencerWeb/geoip2-mmdb/main/Country/GeoLite2-Country.mmdb'
+#filename = 'geoip-lite-country.mmdb'
 
-response = requests.get(url)
-response.raise_for_status()  # اگر فایل 404 یا خطا داشت، اینجا کرش می‌کنه
-with open(filename, 'wb') as f:
-    f.write(response.content)
+#response = requests.get(url)
+#response.raise_for_status()  # اگر فایل 404 یا خطا داشت، اینجا کرش می‌کنه
+#with open(filename, 'wb') as f:
+#    f.write(response.content)
     
 # Move the file to the geoip folder
-os.rename(filename, os.path.join('./geoip-lite', filename))
+#os.rename(filename, os.path.join('./geoip-lite', filename))
 
 
 # Clean up unmatched file
