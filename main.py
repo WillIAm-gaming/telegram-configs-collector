@@ -355,9 +355,9 @@ for index, tg_user in enumerate(array_usernames):
 
 
 # Retrive and update channels from telegram proxies Repository
-url = 'https://raw.githubusercontent.com/soroushmirzaei/telegram-proxies-collector/main/telegram channels.json'
+#url = 'https://raw.githubusercontent.com/soroushmirzaei/telegram-proxies-collector/main/telegram channels.json'
 filename = 'telegram proxies channel.json'
-wget.download(url, filename)
+#wget.download(url, filename)
 
 tg_username_list.update(array_usernames)
 telegram_proxies_channel = json_load('./telegram proxies channel.json')
