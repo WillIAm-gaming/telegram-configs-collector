@@ -131,16 +131,15 @@ def find_matches(text_content):
     # Initialize configuration type patterns
     pattern_telegram_user = r'(?:@)(\w{4,})'
     pattern_url = r'(?i)\b((?:https?:(?:/{1,3}|[a-z0-9%])|[a-z0-9.\-]+[.](?:com|net|org|edu|gov|mil|aero|asia|biz|cat|coop|info|int|jobs|mobi|museum|name|post|pro|tel|travel|xxx|ac|ad|ae|af|ag|ai|al|am|an|ao|aq|ar|as|at|au|aw|ax|az|ba|bb|bd|be|bf|bg|bh|bi|bj|bm|bn|bo|br|bs|bt|bv|bw|by|bz|ca|cc|cd|cf|cg|ch|ci|ck|cl|cm|cn|co|cr|cs|cu|cv|cx|cy|cz|dd|de|dj|dk|dm|do|dz|ec|ee|eg|eh|er|es|et|eu|fi|fj|fk|fm|fo|fr|ga|gb|gd|ge|gf|gg|gh|gi|gl|gm|gn|gp|gq|gr|gs|gt|gu|gw|gy|hk|hm|hn|hr|ht|hu|id|ie|il|im|in|io|iq|ir|is|it|je|jm|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|ls|lt|lu|lv|ly|ma|mc|md|me|mg|mh|mk|ml|mm|mn|mo|mp|mq|mr|ms|mt|mu|mv|mw|mx|my|mz|na|nc|ne|nf|ng|ni|nl|no|np|nr|nu|nz|om|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|ps|pt|pw|py|qa|re|ro|rs|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|Ja|sk|sl|sm|sn|so|sr|ss|st|su|sv|sx|sy|sz|tc|td|tf|tg|th|tj|tk|tl|tm|tn|to|tp|tr|tt|tv|tw|tz|ua|ug|uk|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|yu|za|zm|zw)/)(?:[^\s()<>{}\[\]]+|\([^\s()]*?\([^\s()]+\)[^\s()]*?\)|\([^\s]+?\))+(?:\([^\s()]*?\([^\s()]+\)[^\s()]*?\)|\([^\s]+?\)|[^\s`!()\[\]{};:\'".,<>?«»“”‘’])|(?:(?<!@)[a-z0-9]+(?:[.\-][a-z0-9]+)*[.](?:com|net|org|edu|gov|mil|aero|asia|biz|cat|coop|info|int|jobs|mobi|museum|name|post|pro|tel|travel|xxx|ac|ad|ae|af|ag|ai|al|am|an|ao|aq|ar|as|at|au|aw|ax|az|ba|bb|bd|be|bf|bg|bh|bi|bj|bm|bn|bo|br|bs|bt|bv|bw|by|bz|ca|cc|cd|cf|cg|ch|ci|ck|cl|cm|cn|co|cr|cs|cu|cv|cx|cy|cz|dd|de|dj|dk|dm|do|dz|ec|ee|eg|eh|er|es|et|eu|fi|fj|fk|fm|fo|fr|ga|gb|gd|ge|gf|gg|gh|gi|gl|gm|gn|gp|gq|gr|gs|gt|gu|gw|gy|hk|hm|hn|hr|ht|hu|id|ie|il|im|in|io|iq|ir|is|it|je|jm|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|ls|lt|lu|lv|ly|ma|mc|md|me|mg|mh|mk|ml|mm|mn|mo|mp|mq|mr|ms|mt|mu|mv|mw|mx|my|mz|na|nc|ne|nf|ng|ni|nl|no|np|nr|nu|nz|om|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|ps|pt|pw|py|qa|re|ro|rs|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|Ja|sk|sl|sm|sn|so|sr|ss|st|su|sv|sx|sy|sz|tc|td|tf|tg|th|tj|tk|tl|tm|tn|to|tp|tr|tt|tv|tw|tz|ua|ug|uk|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|yu|za|zm|zw)\b/?(?!@)))'
-    pattern_shadowsocks = r"(?<![\w-])(ss://[^\s<>#]+)"
-    pattern_trojan = r"(?<![\w-])(trojan://[^\s<>#]+)"
-    pattern_vmess = r"(?<![\w-])(vmess://[^\s<>#]+)"
-    pattern_vless = r"(?<![\w-])(vless://(?:(?!=reality)[^\s<>#])+(?=[\s<>#]))"
-    pattern_reality = r"(?<![\w-])(vless://[^\s<>#]+?security=reality[^\s<>#]*)"
-    pattern_tuic = r"(?<![\w-])(tuic://[^\s<>#]+)"
-    pattern_hysteria = r"(?<![\w-])(hysteria://[^\s<>#]+)"
-    pattern_hysteria_ver2 = r"(?<![\w-])(hy2://[^\s<>#]+)"
-    pattern_juicity = r"(?<![\w-])(juicity://[^\s<>#]+)"
-
+    pattern_shadowsocks = r"ss://[a-zA-Z0-9+/=:_\-#]+"
+    pattern_trojan = r"trojan://[a-zA-Z0-9@:._\-/?&=#%]+"
+    pattern_vmess = r"vmess://[a-zA-Z0-9+/=:_\-#]+"
+    pattern_vless = r"vless://[a-zA-Z0-9@:._\-/?&=#%]+"
+    pattern_reality = r"vless://[a-zA-Z0-9@:._\-/?&=#%]*security=reality[a-zA-Z0-9@:._\-/?&=#%]*"
+    pattern_tuic = r"tuic://[a-zA-Z0-9@:._\-/?&=#%]+"
+    pattern_hysteria = r"hysteria://[a-zA-Z0-9@:._\-/?&=#%]+"
+    pattern_hysteria_ver2 = r"hy2://[a-zA-Z0-9@:._\-/?&=#%]+"
+    pattern_juicity = r"juicity://[a-zA-Z0-9@:._\-/?&=#%]+"
     # Find all matches of patterns in text
     matches_usersname = re.findall(pattern_telegram_user, text_content, re.IGNORECASE)
     matches_url = re.findall(pattern_url, text_content, re.IGNORECASE)
