@@ -37,8 +37,12 @@ if os.path.exists('./geoip-lite/geoip-lite-country.mmdb'):
 # Download the file and rename it
 url = 'https://raw.githubusercontent.com/SilencerWeb/geoip2-mmdb/main/Country/GeoLite2-Country.mmdb'
 filename = 'geoip-lite-country.mmdb'
-wget.download(url, filename)
 
+response = requests.get(url)
+response.raise_for_status()  # اگر فایل 404 یا خطا داشت، اینجا کرش می‌کنه
+with open(filename, 'wb') as f:
+    f.write(response.content)
+    
 # Move the file to the geoip folder
 os.rename(filename, os.path.join('./geoip-lite', filename))
 
