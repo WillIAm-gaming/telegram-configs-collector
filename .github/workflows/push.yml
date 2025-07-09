@@ -13,6 +13,8 @@ jobs:
     steps:
     - name: Checkout Repository Contents
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # 👈 این باعث می‌شه کل git history رو بکشه پایین
 
     - name: Pull latest changes from main (to prevent conflicts)
       run: git pull origin main --rebase
