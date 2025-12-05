@@ -135,15 +135,46 @@ def get_country_flag(country_code):
 
 
 def get_continent(country_code):
-    continent_code = pc.country_alpha2_to_continent_code(country_code)
-    if continent_code in ['NA', 'SA']:
-        continent_emoji = "\U0001F30E"
-    elif continent_code in ['EU', 'AF', 'AN']:
-        continent_emoji = "\U0001F30D"
-    elif continent_code in ['AS', 'OC']:
-        continent_emoji = "\U0001F30F"
-    
-    return continent_emoji
+    """
+    Map ISO-3166 alpha-2 code to a continent emoji.
+
+    - Handles special / non-standard codes (TL, XK, NA, …).
+    - Never raises KeyError if pycountry_convert doesn't know the code.
+    """
+    if not country_code:
+        return "\U0001F30D"  # generic globe 🌍
+
+    code = country_code.upper()
+
+    # Manual overrides for codes that MaxMind / GeoIP may return
+    manual_map = {
+        "TL": "AS",  # Timor-Leste -> Asia
+        "XK": "EU",  # Kosovo (often used but not officially ISO)
+        "NA": None,  # your own "Not Available" sentinel
+    }
+
+    if code in manual_map:
+        continent_code = manual_map[code]
+        if continent_code is None:
+            # Unknown / NA -> generic globe
+            return "\U0001F30D"
+    else:
+        try:
+            continent_code = pc.country_alpha2_to_continent_code(code)
+        except KeyError:
+            # Unknown code -> generic globe
+            return "\U0001F30D"
+
+    if continent_code in ("NA", "SA"):
+        return "\U0001F30E"  # 🌎 Americas
+    elif continent_code in ("EU", "AF", "AN"):
+        return "\U0001F30D"  # 🌍 Europe/Africa
+    elif continent_code in ("AS", "OC"):
+        return "\U0001F30F"  # 🌏 Asia/Oceania
+
+    # Fallback for unexpected continent codes
+    return "\U0001F30D"
+
 
 
 def check_port(ip, port, timeout=1):
